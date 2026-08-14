@@ -63,7 +63,11 @@ func (s *URLSignerLocal) SignIfLocal(path string) string {
 		return path
 	}
 
-	return path
+	signed, err := s.Sign(path)
+	if err != nil {
+		return path
+	}
+	return signed
 }
 
 func (s *URLSignerLocal) SignAndGetPublicURL(rawPath string) (string, error) {

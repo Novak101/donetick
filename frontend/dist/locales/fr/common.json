@@ -1,0 +1,151 @@
+{
+  "save": "Enregistrer",
+  "cancel": "Annuler",
+  "delete": "Supprimer",
+  "edit": "Modifier",
+  "close": "Fermer",
+  "confirm": "Confirmer",
+  "loading": "Chargement...",
+  "error": "Erreur",
+  "success": "Succès",
+  "warning": "Avertissement",
+  "refresh": "Actualiser",
+  "copy": "Copier",
+  "copied": "Copié !",
+  "settings": "Paramètres",
+  "yes": "Oui",
+  "no": "Non",
+  "back": "Retour",
+  "backToCalendar": "Retour au Calendrier",
+  "logout": "Déconnexion",
+  "version": "Version",
+  "navigation": {
+    "search": "Recherche",
+    "allTasks": "Toutes les Tâches",
+    "archived": "Archivées",
+    "things": "Objets",
+    "labels": "Étiquettes",
+    "projects": "Projets",
+    "filters": "Filtres",
+    "activities": "Activités",
+    "points": "Points",
+    "settings": "Paramètres",
+    "reportBug": "Report a Bug"
+  },
+  "search": {
+    "title": "Recherche",
+    "placeholder": "Rechercher dans Donetick",
+    "inputAriaLabel": "Rechercher des tâches, l’historique, des projets, des étiquettes et des paramètres",
+    "deviceNote": "Recherche dans le contenu disponible sur cet appareil",
+    "escape": "Échap",
+    "recent": "Récents",
+    "empty": {
+      "title": "Aucune correspondance directe",
+      "subtitle": "Vous pouvez tout de même filtrer la liste des tâches avec cette recherche."
+    },
+    "groups": {
+      "tasks": "Tâches",
+      "history": "Remarques",
+      "projects": "Projets",
+      "labels": "Étiquettes",
+      "people": "Personnes",
+      "settings": "Paramètres",
+      "actions": "Actions rapides"
+    },
+    "actions": {
+      "quickAction": "Action rapide",
+      "navigation": "Navigation",
+      "createTask": "Créer une tâche",
+      "viewAllTasks": "Voir toutes les tâches",
+      "viewArchivedTasks": "Voir les tâches archivées",
+      "openSettings": "Ouvrir les paramètres",
+      "filterTasks": "Afficher les tâches correspondant à « {{query}} »",
+      "filterTasksSubtitle": "Filtrer la liste des tâches"
+    },
+    "footer": {
+      "navigate": "Naviguer",
+      "open": "Ouvrir",
+      "results_one": "{{count}} résultat",
+      "results_other": "{{count}} résultats",
+      "typeToSearch": "Saisissez du texte pour rechercher"
+    }
+  },
+  "feedback": {
+    "later": "Peut-être plus tard",
+    "sentiment": {
+      "title": "How's Donetick working for you?",
+      "subtitle": "Votre réponse nous aide à décider de ce qu'il faut construire ensuite.",
+      "options": {
+        "love": "J'adore",
+        "okay": "C'est ok",
+        "issues": "Problèmes rencontrés"
+      }
+    },
+    "categories": {
+      "bugs": "Anomalies",
+      "missingFeature": "Fonctionnalités manquantes",
+      "tooComplicated": "Trop compliqué",
+      "slow": "Lent",
+      "notifications": "Notifications",
+      "ai": "IA",
+      "other": "Autres"
+    },
+    "details": {
+      "title": "Que pouvons-nous améliorer ?",
+      "messageLabel": "Dites-nous-en plus",
+      "messagePlaceholder": "What happened, or what would make this better?",
+      "contextNote": "We'll include your app version, device and platform so we can reproduce issues.",
+      "submit": "Envoyer vos remarques",
+      "contextNoteSelfHosted": "Vous êtes sur une instance autohébergée, donc rien n'est envoyé depuis votre serveur — nous allons ouvrir un problème GitHub prérempli que vous pouvez examiner et modifier si besoin.",
+      "submitSelfHosted": "Continuer sur GitHub"
+    },
+    "review": {
+      "title": "Nous sommes ravis que vous l'appréciez !",
+      "subtitle": "A rating or a star helps other people find Donetick.",
+      "github": "Mettez une étoile sur GitHub",
+      "appStore": "Évaluer sur l'App Store",
+      "playStore": "Évaluer sur Google Play"
+    },
+    "thanks": {
+      "title": "Merci pour votre retour",
+      "subtitle": "We read every response and it shapes what we work on next."
+    },
+    "github": {
+      "title": "Signaler sur GitHub",
+      "subtitle": "We've filled in an issue with your notes and version details. Nothing has been sent yet — review it and post when you're ready.",
+      "open": "Ouvrir un ticket"
+    }
+  },
+  "done": "Done",
+  "clearAll": "Clear all",
+  "upload": {
+    "quotaTitle": "Storage Quota Exceeded",
+    "quotaMessage": "You have exceeded your quota for uploading files.",
+    "tooLargeTitle": "File Too Large",
+    "tooLargeMessage": "The file you are trying to upload is too large.",
+    "deniedTitle": "Permission Denied",
+    "deniedMessage": "You do not have permission to upload files."
+  },
+  "getStarted": "Get Started!",
+  "imageLoadFailed": "Failed to load image.",
+  "typeHere": "Type in here…",
+  "summaryOfChores": "This is a summary of your chores",
+  "loadingOffline": "You are offline",
+  "loadingOfflineSub": "This not available while offline. Please check your internet connection and try again.",
+  "loadingSlow": "This is taking longer than usual. There might be an issue.",
+  "navigateBack": "Navigate Back",
+  "bottomNav": "Bottom Navigation",
+  "profile": "Profile",
+  "autocompletePlaceholder": "Type here...",
+  "errorScreen": {
+    "title": "Something went wrong",
+    "fallback": "An unexpected error occurred. Try reloading — it usually fixes it.",
+    "tryAgain": "Try again",
+    "home": "Home",
+    "login": "Login",
+    "hideDetails": "Hide error details",
+    "showDetails": "Show error details",
+    "copyToClipboard": "Copy to clipboard",
+    "copied": "Error details copied to clipboard"
+  }
+}

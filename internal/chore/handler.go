@@ -329,6 +329,7 @@ type ChoreReq struct {
 	ProjectID            *int                          `json:"projectId" binding:"omitempty"`
 	ThingTrigger         *tModel.ThingTrigger          `json:"thingTrigger"`
 	DraftId              *string                       `json:"draftId,omitempty"`
+	Icon                 *string                       `json:"icon" binding:"omitempty"`
 }
 
 type ActionOptions struct {
@@ -548,6 +549,9 @@ func (h *Handler) CreateChore(c *gin.Context) {
 		// SubTasks removed to prevent duplicate creation - handled by UpdateSubtask call below
 		// it's need custom logic to handle subtask creation as we send negative ids sometimes when we creating parent child releationship
 		// when the subtask is not yet created
+	}
+	if choreReq.Icon != nil {
+		createdChore.Icon = *choreReq.Icon
 	}
 	id, err := h.choreRepo.CreateChore(c, createdChore)
 	createdChore.ID = id
@@ -853,6 +857,10 @@ func (h *Handler) EditChore(c *gin.Context) {
 		IsPrivate:              *choreReq.IsPrivate,
 		ProjectID:              choreReq.ProjectID,
 		Status:                 oldChore.Status,
+		Icon:                   oldChore.Icon,
+	}
+	if choreReq.Icon != nil {
+		updatedChore.Icon = *choreReq.Icon
 	}
 
 	assigneeIDs := make([]int, 0, len(choreReq.Assignees))

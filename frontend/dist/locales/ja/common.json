@@ -1,0 +1,151 @@
+{
+  "save": "保存",
+  "cancel": "キャンセル",
+  "delete": "削除",
+  "edit": "編集",
+  "close": "閉じる",
+  "confirm": "確認",
+  "loading": "読み込み中...",
+  "error": "エラー",
+  "success": "成功",
+  "warning": "警告",
+  "refresh": "更新",
+  "copy": "コピー",
+  "copied": "コピーしました！",
+  "settings": "設定",
+  "yes": "はい",
+  "no": "いいえ",
+  "back": "戻る",
+  "backToCalendar": "カレンダーに戻る",
+  "logout": "ログアウト",
+  "version": "バージョン",
+  "navigation": {
+    "search": "検索",
+    "allTasks": "すべてのタスク",
+    "archived": "アーカイブ済み",
+    "things": "Things",
+    "labels": "ラベル",
+    "projects": "プロジェクト",
+    "filters": "フィルター",
+    "activities": "アクティビティ",
+    "points": "ポイント",
+    "settings": "設定",
+    "reportBug": "Report a Bug"
+  },
+  "search": {
+    "title": "検索",
+    "placeholder": "Donetick を検索",
+    "inputAriaLabel": "タスク、履歴、プロジェクト、ラベル、設定を検索",
+    "deviceNote": "このデバイスで利用できるコンテンツを検索しています",
+    "escape": "Esc",
+    "recent": "最近",
+    "empty": {
+      "title": "一致する項目はありません",
+      "subtitle": "この検索でタスク一覧を絞り込むことはできます。"
+    },
+    "groups": {
+      "tasks": "タスク",
+      "history": "ノート",
+      "projects": "プロジェクト",
+      "labels": "ラベル",
+      "people": "メンバー",
+      "settings": "設定",
+      "actions": "クイックアクション"
+    },
+    "actions": {
+      "quickAction": "クイックアクション",
+      "navigation": "ナビゲーション",
+      "createTask": "タスクを作成",
+      "viewAllTasks": "すべてのタスクを表示",
+      "viewArchivedTasks": "アーカイブ済みのタスクを表示",
+      "openSettings": "設定を開く",
+      "filterTasks": "「{{query}}」に一致するタスクを表示",
+      "filterTasksSubtitle": "タスク一覧を絞り込む"
+    },
+    "footer": {
+      "navigate": "移動",
+      "open": "開く",
+      "results_one": "{{count}} result",
+      "results_other": "{{count}} 件の結果",
+      "typeToSearch": "入力して検索"
+    }
+  },
+  "feedback": {
+    "later": "Maybe later",
+    "sentiment": {
+      "title": "How's Donetick working for you?",
+      "subtitle": "Your answer helps us decide what to build next.",
+      "options": {
+        "love": "Love it",
+        "okay": "It's okay",
+        "issues": "Having issues"
+      }
+    },
+    "categories": {
+      "bugs": "Bugs",
+      "missingFeature": "Missing feature",
+      "tooComplicated": "Too complicated",
+      "slow": "Slow",
+      "notifications": "Notifications",
+      "ai": "AI",
+      "other": "Other"
+    },
+    "details": {
+      "title": "What could we improve?",
+      "messageLabel": "Tell us more",
+      "messagePlaceholder": "What happened, or what would make this better?",
+      "contextNote": "We'll include your app version, device and platform so we can reproduce issues.",
+      "submit": "Send feedback",
+      "contextNoteSelfHosted": "You're on a self-hosted instance, so nothing is sent from your server — we'll open a pre-filled GitHub issue you can review and edit first.",
+      "submitSelfHosted": "Continue to GitHub"
+    },
+    "review": {
+      "title": "Glad you're enjoying it!",
+      "subtitle": "A rating or a star helps other people find Donetick.",
+      "github": "Star on GitHub",
+      "appStore": "Rate on the App Store",
+      "playStore": "Rate on Google Play"
+    },
+    "thanks": {
+      "title": "Thanks for the feedback",
+      "subtitle": "We read every response and it shapes what we work on next."
+    },
+    "github": {
+      "title": "Report it on GitHub",
+      "subtitle": "We've filled in an issue with your notes and version details. Nothing has been sent yet — review it and post when you're ready.",
+      "open": "Open the issue"
+    }
+  },
+  "done": "Done",
+  "clearAll": "Clear all",
+  "upload": {
+    "quotaTitle": "Storage Quota Exceeded",
+    "quotaMessage": "You have exceeded your quota for uploading files.",
+    "tooLargeTitle": "File Too Large",
+    "tooLargeMessage": "The file you are trying to upload is too large.",
+    "deniedTitle": "Permission Denied",
+    "deniedMessage": "You do not have permission to upload files."
+  },
+  "getStarted": "Get Started!",
+  "imageLoadFailed": "Failed to load image.",
+  "typeHere": "Type in here…",
+  "summaryOfChores": "This is a summary of your chores",
+  "loadingOffline": "You are offline",
+  "loadingOfflineSub": "This not available while offline. Please check your internet connection and try again.",
+  "loadingSlow": "This is taking longer than usual. There might be an issue.",
+  "navigateBack": "Navigate Back",
+  "bottomNav": "Bottom Navigation",
+  "profile": "Profile",
+  "autocompletePlaceholder": "Type here...",
+  "errorScreen": {
+    "title": "Something went wrong",
+    "fallback": "An unexpected error occurred. Try reloading — it usually fixes it.",
+    "tryAgain": "Try again",
+    "home": "Home",
+    "login": "Login",
+    "hideDetails": "Hide error details",
+    "showDetails": "Show error details",
+    "copyToClipboard": "Copy to clipboard",
+    "copied": "Error details copied to clipboard"
+  }
+}

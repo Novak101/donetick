@@ -78,6 +78,7 @@ type Chore struct {
 	Project                *pModel.Project            `json:"project,omitempty" gorm:"foreignkey:ProjectID;references:ID"`                            // Project relationship
 	SyncVersion            int64                      `json:"syncVersion" gorm:"column:sync_version;not null;default:0;index;index:idx_chores_circle_sync_version,priority:2"`
 	Attachments            []storageModel.StorageFile `json:"attachments,omitempty" gorm:"-"`
+	Icon                   string                     `json:"icon,omitempty" gorm:"column:icon"` // Material icon name shown for this chore (e.g. "LocalLaundryService")
 }
 
 type Status int8
