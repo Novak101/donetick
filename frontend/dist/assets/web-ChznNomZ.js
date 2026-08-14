@@ -1,0 +1,1 @@
+import{fa as n}from"./TermsView-BKYxoc0b.js";import"./index-p0QGJrM3.js";class i extends n{async scanDocument(t){throw this.unimplemented("Document scanning is not supported on the web.")}async getPluginVersion(){return{version:"web"}}}export{i as DocumentScannerWeb};
