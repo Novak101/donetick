@@ -1425,6 +1425,7 @@ type ChildUserResponse struct {
 	ID          int    `json:"id"`
 	Username    string `json:"username"`
 	DisplayName string `json:"displayName"`
+	Image       string `json:"image"`
 	UserType    string `json:"userType"`
 	CreatedAt   string `json:"createdAt"`
 }
@@ -1535,6 +1536,7 @@ func (h *Handler) createChildUser(c *gin.Context) {
 		ID:          createdUser.ID,
 		Username:    createdUser.Username,
 		DisplayName: createdUser.DisplayName,
+		Image:       createdUser.Image,
 		UserType:    "child",
 		CreatedAt:   createdUser.CreatedAt.Format(time.RFC3339),
 	}
@@ -1668,6 +1670,7 @@ func (h *Handler) getChildUsers(c *gin.Context) {
 			ID:          child.ID,
 			Username:    child.Username,
 			DisplayName: child.DisplayName,
+			Image:       child.Image,
 			UserType:    "child",
 			CreatedAt:   child.CreatedAt.Format(time.RFC3339),
 		})
