@@ -15,6 +15,7 @@ type Circle struct {
 	InviteCode         string     `json:"invite_code" gorm:"column:invite_code"` // Invite code
 	Disabled           bool       `json:"disabled" gorm:"column:disabled"`       // Disabled
 	WebhookURL         *string    `json:"webhook_url" gorm:"column:webhook_url"` // Webhook URL
+	ShareUserID        *int       `json:"-" gorm:"column:share_user_id"`         // Placeholder user used to act on behalf of anonymous share-link requests
 	SubscriptionStatus *string    `gorm:"column:status;<-:false"`                // read one column
 	ExpiredAt          *time.Time `gorm:"column:expired_at;<-:false"`            // read one column
 }

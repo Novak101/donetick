@@ -204,6 +204,7 @@ func main() {
 			label.Routes,
 			project.Routes,
 			filter.Routes,
+			filter.ShareAPIs,
 
 			storage.Routes,
 			frontend.Routes,

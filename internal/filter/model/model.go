@@ -130,18 +130,20 @@ func (fc FilterConditions) Value() (driver.Value, error) {
 }
 
 type Filter struct {
-	ID          int              `json:"id" gorm:"primary_key"`
-	Name        string           `json:"name" gorm:"column:name;not null"`
-	Description *string          `json:"description" gorm:"column:description"`
-	Color       *string          `json:"color" gorm:"column:color"`
-	Icon        *string          `json:"icon" gorm:"column:icon"`
-	Conditions  FilterConditions `json:"conditions" gorm:"column:conditions;type:json;not null"`
-	Operator    LogicalOperator  `json:"operator" gorm:"column:operator;default:'AND';not null"`
-	CircleID    int              `json:"circleId" gorm:"column:circle_id;index;not null"`
-	CreatedBy   int              `json:"createdBy" gorm:"column:created_by;not null"`
-	CreatedAt   time.Time        `json:"createdAt" gorm:"column:created_at;autoCreateTime"`
-	UpdatedAt   *time.Time       `json:"updatedAt,omitempty" gorm:"column:updated_at;autoUpdateTime"`
-	IsPinned    bool             `json:"isPinned" gorm:"column:is_pinned;default:false"`
+	ID           int              `json:"id" gorm:"primary_key"`
+	Name         string           `json:"name" gorm:"column:name;not null"`
+	Description  *string          `json:"description" gorm:"column:description"`
+	Color        *string          `json:"color" gorm:"column:color"`
+	Icon         *string          `json:"icon" gorm:"column:icon"`
+	Conditions   FilterConditions `json:"conditions" gorm:"column:conditions;type:json;not null"`
+	Operator     LogicalOperator  `json:"operator" gorm:"column:operator;default:'AND';not null"`
+	CircleID     int              `json:"circleId" gorm:"column:circle_id;index;not null"`
+	CreatedBy    int              `json:"createdBy" gorm:"column:created_by;not null"`
+	CreatedAt    time.Time        `json:"createdAt" gorm:"column:created_at;autoCreateTime"`
+	UpdatedAt    *time.Time       `json:"updatedAt,omitempty" gorm:"column:updated_at;autoUpdateTime"`
+	IsPinned     bool             `json:"isPinned" gorm:"column:is_pinned;default:false"`
+	ShareEnabled bool             `json:"shareEnabled" gorm:"column:share_enabled;default:false;not null"`
+	ShareToken   *string          `json:"shareToken,omitempty" gorm:"column:share_token;uniqueIndex"`
 }
 
 type FilterReq struct {
