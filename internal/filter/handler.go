@@ -1,6 +1,7 @@
 package filter
 
 import (
+	"errors"
 	"strconv"
 
 	auth "donetick.com/core/internal/auth"
@@ -397,6 +398,126 @@ func (h *Handler) toggleFilterPin(c *gin.Context) {
 	})
 }
 
+// enableFilterShare godoc
+//
+//	@Summary		Enable share link for a filter
+//	@Description	Enables an anonymous, token-based share link for a filter, generating a token if one doesn't exist yet
+//	@Tags			filters
+//	@Accept			json
+//	@Produce		json
+//	@Security		JWTKeyAuth
+//	@Security		APIKeyAuth
+//	@Param			id	path		int							true	"Filter ID"
+//	@Success		200	{object}	map[string]fModel.Filter	"res: updated filter object"
+//	@Failure		400	{object}	map[string]string			"error: Filter ID is required | Invalid filter ID"
+//	@Failure		500	{object}	map[string]string			"error: Error getting current user | internal error"
+//	@Router			/filters/{id}/share/enable [post]
+func (h *Handler) enableFilterShare(c *gin.Context) {
+	currentUser, ok := auth.CurrentUser(c)
+	if !ok {
+		c.JSON(500, gin.H{"error": "Error getting current user"})
+		return
+	}
+
+	filterID, err := parseFilterID(c)
+	if err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+
+	filter, err := h.fRepo.EnableShare(c, filterID, currentUser.ID, currentUser.CircleID)
+	if err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(200, gin.H{"res": filter})
+}
+
+// disableFilterShare godoc
+//
+//	@Summary		Disable share link for a filter
+//	@Description	Disables a filter's share link. The token is kept so re-enabling reuses the same URL.
+//	@Tags			filters
+//	@Accept			json
+//	@Produce		json
+//	@Security		JWTKeyAuth
+//	@Security		APIKeyAuth
+//	@Param			id	path		int							true	"Filter ID"
+//	@Success		200	{object}	map[string]fModel.Filter	"res: updated filter object"
+//	@Failure		400	{object}	map[string]string			"error: Filter ID is required | Invalid filter ID"
+//	@Failure		500	{object}	map[string]string			"error: Error getting current user | internal error"
+//	@Router			/filters/{id}/share/disable [post]
+func (h *Handler) disableFilterShare(c *gin.Context) {
+	currentUser, ok := auth.CurrentUser(c)
+	if !ok {
+		c.JSON(500, gin.H{"error": "Error getting current user"})
+		return
+	}
+
+	filterID, err := parseFilterID(c)
+	if err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+
+	filter, err := h.fRepo.DisableShare(c, filterID, currentUser.ID, currentUser.CircleID)
+	if err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(200, gin.H{"res": filter})
+}
+
+// regenerateFilterShare godoc
+//
+//	@Summary		Regenerate a filter's share token
+//	@Description	Issues a fresh share token for a filter, invalidating any previously shared URL
+//	@Tags			filters
+//	@Accept			json
+//	@Produce		json
+//	@Security		JWTKeyAuth
+//	@Security		APIKeyAuth
+//	@Param			id	path		int							true	"Filter ID"
+//	@Success		200	{object}	map[string]fModel.Filter	"res: updated filter object"
+//	@Failure		400	{object}	map[string]string			"error: Filter ID is required | Invalid filter ID"
+//	@Failure		500	{object}	map[string]string			"error: Error getting current user | internal error"
+//	@Router			/filters/{id}/share/regenerate [post]
+func (h *Handler) regenerateFilterShare(c *gin.Context) {
+	currentUser, ok := auth.CurrentUser(c)
+	if !ok {
+		c.JSON(500, gin.H{"error": "Error getting current user"})
+		return
+	}
+
+	filterID, err := parseFilterID(c)
+	if err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+
+	filter, err := h.fRepo.RegenerateShareToken(c, filterID, currentUser.ID, currentUser.CircleID)
+	if err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(200, gin.H{"res": filter})
+}
+
+func parseFilterID(c *gin.Context) (int, error) {
+	filterIDRaw := c.Param("id")
+	if filterIDRaw == "" {
+		return 0, errors.New("filter ID is required")
+	}
+	filterID, err := strconv.Atoi(filterIDRaw)
+	if err != nil {
+		return 0, errors.New("invalid filter ID")
+	}
+	return filterID, nil
+}
+
 // getPinnedFilters godoc
 //
 //	@Summary		Get pinned filters
@@ -474,5 +595,8 @@ func Routes(r *gin.Engine, h *Handler, multiAuthMiddleware *auth.MultiAuthMiddle
 		filterRoutes.PUT("/:id", h.updateFilter)
 		filterRoutes.DELETE("/:id", h.deleteFilter)
 		filterRoutes.POST("/:id/toggle-pin", h.toggleFilterPin)
+		filterRoutes.POST("/:id/share/enable", h.enableFilterShare)
+		filterRoutes.POST("/:id/share/disable", h.disableFilterShare)
+		filterRoutes.POST("/:id/share/regenerate", h.regenerateFilterShare)
 	}
 }

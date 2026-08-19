@@ -186,3 +186,8 @@ func (r *CircleRepository) RedeemPoints(c context.Context, circleID int, userID 
 func (r *CircleRepository) SetWebhookURL(c context.Context, circleID int, webhookURL *string) error {
 	return r.db.WithContext(c).Model(&cModel.Circle{}).Where("id = ?", circleID).Update("webhook_url", webhookURL).Error
 }
+
+// SetShareUserID records the placeholder user provisioned to act on behalf of anonymous share-link requests for this circle
+func (r *CircleRepository) SetShareUserID(c context.Context, circleID int, userID int) error {
+	return r.db.WithContext(c).Model(&cModel.Circle{}).Where("id = ?", circleID).Update("share_user_id", userID).Error
+}

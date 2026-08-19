@@ -6,6 +6,7 @@ import (
 
 	config "donetick.com/core/config"
 	fModel "donetick.com/core/internal/filter/model"
+	"donetick.com/core/internal/utils"
 	"donetick.com/core/logging"
 	"gorm.io/gorm"
 )
@@ -148,6 +149,75 @@ func (r *FilterRepository) GetFiltersByUsage(ctx context.Context, circleID int) 
 		return nil, err
 	}
 	return filters, nil
+}
+
+// GetFilterByShareToken gets a filter by its share token, only if sharing is enabled
+func (r *FilterRepository) GetFilterByShareToken(ctx context.Context, token string) (*fModel.Filter, error) {
+	var filter fModel.Filter
+	if err := r.db.WithContext(ctx).Where("share_token = ? AND share_enabled = ?", token, true).First(&filter).Error; err != nil {
+		return nil, err
+	}
+	return &filter, nil
+}
+
+// EnableShare turns on sharing for a filter, generating a token if one doesn't exist yet
+func (r *FilterRepository) EnableShare(ctx context.Context, filterID int, userID int, circleID int) (*fModel.Filter, error) {
+	filter, err := r.checkFilterOwnership(ctx, filterID, userID, circleID)
+	if err != nil {
+		return nil, err
+	}
+
+	updates := map[string]interface{}{"share_enabled": true}
+	if filter.ShareToken == nil {
+		updates["share_token"] = utils.GenerateShareToken(ctx)
+	}
+
+	if err := r.db.WithContext(ctx).Model(&fModel.Filter{}).Where("id = ? AND circle_id = ?", filterID, circleID).Updates(updates).Error; err != nil {
+		return nil, err
+	}
+
+	return r.GetFilterByID(ctx, filterID, circleID)
+}
+
+// DisableShare turns off sharing for a filter, keeping the existing token so re-enabling reuses the same URL
+func (r *FilterRepository) DisableShare(ctx context.Context, filterID int, userID int, circleID int) (*fModel.Filter, error) {
+	if _, err := r.checkFilterOwnership(ctx, filterID, userID, circleID); err != nil {
+		return nil, err
+	}
+
+	if err := r.db.WithContext(ctx).Model(&fModel.Filter{}).Where("id = ? AND circle_id = ?", filterID, circleID).Update("share_enabled", false).Error; err != nil {
+		return nil, err
+	}
+	return r.GetFilterByID(ctx, filterID, circleID)
+}
+
+// RegenerateShareToken issues a fresh share token for a filter, invalidating the old URL
+func (r *FilterRepository) RegenerateShareToken(ctx context.Context, filterID int, userID int, circleID int) (*fModel.Filter, error) {
+	if _, err := r.checkFilterOwnership(ctx, filterID, userID, circleID); err != nil {
+		return nil, err
+	}
+
+	token := utils.GenerateShareToken(ctx)
+	if err := r.db.WithContext(ctx).Model(&fModel.Filter{}).Where("id = ? AND circle_id = ?", filterID, circleID).Update("share_token", token).Error; err != nil {
+		return nil, err
+	}
+	return r.GetFilterByID(ctx, filterID, circleID)
+}
+
+// checkFilterOwnership loads a filter and confirms userID is its creator, matching the
+// permission convention used by UpdateFilter/DeleteFilter/ToggleFilterPin.
+func (r *FilterRepository) checkFilterOwnership(ctx context.Context, filterID int, userID int, circleID int) (*fModel.Filter, error) {
+	var filter fModel.Filter
+	if err := r.db.WithContext(ctx).Where("id = ? AND circle_id = ?", filterID, circleID).First(&filter).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, errors.New("filter not found")
+		}
+		return nil, err
+	}
+	if filter.CreatedBy != userID {
+		return nil, errors.New("user does not have permission to update this filter")
+	}
+	return &filter, nil
 }
 
 // FilterNameExists checks if a filter name already exists (case-insensitive)
