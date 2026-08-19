@@ -1,7 +1,10 @@
 {
   "iconPicker": {
     "chooseIcon": "Choose Project Icon",
-    "availableIcons": "Available Icons"
+    "availableIcons": "Available Icons",
+    "searchIcons": "Search Icons",
+    "searchPlaceholder": "e.g. work, home, travel...",
+    "noResults": "No icons match \"{{query}}\""
   },
   "defaultChip": "Default",
   "tasks_one": "{{count}} task",
