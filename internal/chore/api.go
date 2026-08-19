@@ -436,19 +436,8 @@ func APIs(cfg *config.Config, api *API, r *gin.Engine, auth *jwt.GinJWTMiddlewar
 		tasksAPI.GET("", api.GetAllChores)
 		tasksAPI.POST("", api.CreateChore)
 		tasksAPI.DELETE("/:id", api.DeleteChore)
-	}
-
-	// Plus member only endpoints
-	tasksPlusAPI := r.Group("eapi/v1/chore")
-	tasksPlusAPI.Use(
-		utils.TimeoutMiddleware(cfg.Server.WriteTimeout),
-		utils.RateLimitMiddleware(limiter),
-		authMiddleware.APITokenMiddleware(userRepo),
-		authMiddleware.RequirePlusMemberMiddleware(),
-	)
-	{
-		tasksPlusAPI.POST("/:id/complete", api.CompleteChore)
-		tasksPlusAPI.PUT("/:id", api.UpdateChore)
+		tasksAPI.POST("/:id/complete", api.CompleteChore)
+		tasksAPI.PUT("/:id", api.UpdateChore)
 	}
 
 	circleAPI := r.Group("eapi/v1/circle")
@@ -456,7 +445,6 @@ func APIs(cfg *config.Config, api *API, r *gin.Engine, auth *jwt.GinJWTMiddlewar
 		utils.TimeoutMiddleware(cfg.Server.WriteTimeout),
 		utils.RateLimitMiddleware(limiter),
 		authMiddleware.APITokenMiddleware(userRepo),
-		authMiddleware.RequirePlusMemberMiddleware(),
 	)
 	{
 		circleAPI.GET("/members", api.GetCircleMembers)
