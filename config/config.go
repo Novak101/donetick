@@ -137,6 +137,8 @@ type ServerConfig struct {
 	ServeFrontend    bool          `mapstructure:"serve_frontend" yaml:"serve_frontend"`
 	ServeSwagger     bool          `mapstructure:"serve_swagger" yaml:"serve_swagger"`
 	PublicHost       string        `mapstructure:"public_host" yaml:"public_host" default:"http://localhost:2021"`
+	CertFile         string        `mapstructure:"cert_file" yaml:"cert_file"`
+	KeyFile          string        `mapstructure:"key_file" yaml:"key_file"`
 }
 
 type SchedulerConfig struct {
