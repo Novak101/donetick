@@ -299,13 +299,7 @@ func newServer(lc fx.Lifecycle, cfg *config.Config, db *gorm.DB, notifier *notif
 			}
 
 			go func() {
-				var err error
-				if cfg.Server.CertFile != "" && cfg.Server.KeyFile != "" {
-					err = srv.ListenAndServeTLS(cfg.Server.CertFile, cfg.Server.KeyFile)
-				} else {
-					err = srv.ListenAndServe()
-				}
-				if err != nil && err != http.ErrServerClosed {
+				if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 					log.Fatalf("listen: %s\n", err)
 				}
 			}()
